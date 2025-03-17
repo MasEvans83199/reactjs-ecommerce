@@ -4,6 +4,7 @@ import { Row } from './components/Row'
 import { ProductCard } from './components/ProductCard'
 import { SiteHeader } from './components/SiteHeader'
 import { sampleProductsList } from './assets/sampleProducts'
+import { CartItemsList } from './components/CartItemsList'
 
 
 function App() {
@@ -13,9 +14,11 @@ function App() {
     <Column>
       <SiteHeader />
       <Row
-      style={{flexWrap:"wrap"}}
+        style={{ flexWrap: "wrap" }}
       >
-        {sampleProductsList.map((p => <ProductCard key={p.id + p.title} product={p} />))}
+        {sampleProductsList.map((p) => (
+          <ProductCard key={p.id + p.title} product={p} />
+        ))}
       </Row>
     </Column>
   )
