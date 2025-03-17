@@ -7,11 +7,14 @@ export const signUpRoute = {
     path:"/api/signup",
     method: "post",
     handler: async (req, res) => {
-        // Debug Log
-        console.log("Received POST request on /api/signup");
         
-        const {email, password} = req.body
-        if(!email || !password) return res.sendStatus(500);
+        const {email, firstName, lastName, location, password} = req.body;
+        if(!email || !password || !firstName || !lastName || !location) 
+            return res.sendStatus(500);
+
+        const user = await db.collection("users").findOne({ email });
+        if (user) 
+            return res.sendStatus(409);
 
         const saltRounds = 10;
         const salt = await bcrypt.genSalt(saltRounds);
@@ -19,14 +22,14 @@ export const signUpRoute = {
         
         
 
-        console.log(`Email: ${email}, password: ${password}`)
-        const db = getDbConnection('ecommerce')
+        const db = getDbConnection('ecommerce');
         const result = await db.collection("users").insertOne({
             email,
             passwordHash
-        })
+        });
 
-        if(!result) return res.sendStatus(500);
+        if(!result) 
+            return res.sendStatus(500);
 
         const {insertedId} = result;
 
@@ -34,10 +37,10 @@ export const signUpRoute = {
         jwt.sign({uid: insertedId, email}, process.env.JWT_SECRET, {expiresIn: "2d"}, (error, token) =>{
             if(error) {
                 console.log("Error generating jwt token:\n", error);
-                return res.status(500).send(error)
+                return res.status(500).send(error);
             }
 
             return res.status(200).json({ token });
-        })        
+        });        
     }
 }

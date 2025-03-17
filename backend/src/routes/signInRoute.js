@@ -6,8 +6,6 @@ export const signInRoute = {
     path: "/api/sign-in",
     method: "post",
     handler: async (req, res) => {
-        // Debug Log
-        console.log("Received ping on /api/sign-in");
 
         const { email, password } = req.body;
 
@@ -27,6 +25,6 @@ export const signInRoute = {
                 return res.sendStatus(500);
 
             return res.status(200).json({token});
-        })
+        });
     }
 }
