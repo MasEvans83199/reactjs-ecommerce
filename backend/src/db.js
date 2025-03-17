@@ -1,7 +1,10 @@
 import {MongoClient} from "mongodb";
+require('dotenv').config({ path: '../.env' });
+
+console.log("DB_CONNECTION_STRING:", process.env.DB_CONNECTION_STRING);
 
 let client;
-const dbURI = "mongodb+srv://mas_evans:M!le6545478510@code-app-cluster.85eq9td.mongodb.net/?retryWrites=true&w=majority&appName=code-app-cluster";
+const dbURI = process.env.DB_CONNECTION_STRING;
 
 export const initializeDbConnection =  async () => {
     client =  await MongoClient.connect(dbURI, {
