@@ -1,26 +1,27 @@
-import './App.css'
-import { Column } from './components/Column'
-import { Row } from './components/Row'
-import { ProductCard } from './components/ProductCard'
-import { SiteHeader } from './components/SiteHeader'
-import { sampleProductsList } from './assets/sampleProducts'
-import { CartItemsList } from './components/CartItemsList'
+import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Column } from './components/Column';
+import { Row } from './components/Row';
+import { ProductCard } from './components/ProductCard';
+import { SiteHeader } from './components/SiteHeader';
+import { sampleProductsList } from './assets/sampleProducts';
+import { CheckOut } from './pages/CheckOut';
+import { Main } from './pages/Main';
 
 
 function App() {
 
 
   return (
-    <Column>
-      <SiteHeader />
-      <Row
-        style={{ flexWrap: "wrap" }}
-      >
-        {sampleProductsList.map((p) => (
-          <ProductCard key={p.id + p.title} product={p} />
-        ))}
-      </Row>
-    </Column>
+    <Router>
+      <Column>
+        <SiteHeader />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/check-out" element={<CheckOut />} />
+        </Routes>
+      </Column>
+    </Router>
   )
 }
 
