@@ -1,4 +1,5 @@
 import express from "express";
+import { initializeDbConnection } from "./db";
 
 const PORT = process.env.PORT || 8080;
 
@@ -10,6 +11,8 @@ app.get("/ping", (req, res)=> {
     res.send("PONG back at you...");
 });
 
-app.listen(PORT, () =>
-     console.log(`MERN server is listening on port ${PORT}...`)
-);
+initializeDbConnection().then(() => {
+    app.listen(PORT, () =>
+        console.log(`MERN server is listening on port ${PORT}...`)
+    ); 
+});
