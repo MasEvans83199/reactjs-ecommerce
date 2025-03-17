@@ -1,5 +1,7 @@
 import { Column } from "./Column"
+import { LogIn } from "./LogIn"
 import { Row } from "./Row"
+import { SignUp } from "./SignUp"
 
 export const SiteHeader = () => {
     return (
@@ -9,8 +11,8 @@ export const SiteHeader = () => {
             </Row>
             <Row>
                 <button>🛒</button>
-                <button>Sign Up</button>
-                <button>Log In</button>
+                <SignUp />
+                <LogIn />
             </Row>
         </Column>
     )
