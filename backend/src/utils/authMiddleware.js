@@ -16,8 +16,7 @@ export const authMiddleware = (req, res, next) => {
             return res.status(401).json({ message: "Invalid token provided" });
 
         const { uid, email } = decoded
-        req.body.uid = uid
-        req.body.email = email
+        req.user = { uid, email };
 
         next();
     });

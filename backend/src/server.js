@@ -29,7 +29,10 @@ routes.forEach((route) => app[route.method](route.path, route.handler));
 
 app.use("/", authMiddleware);
 
-protectedRoutes.forEach(route => app[route.method](route.path, route.handler));
+protectedRoutes.forEach(route => {
+    app.options(route.path, cors(corsOptions));
+    app[route.method](route.path, authMiddleware, route.handler);
+});
 
 initializeDbConnection().then(() => {
     app.listen(PORT, () =>

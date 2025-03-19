@@ -14,13 +14,13 @@ export const signInRoute = {
         if(!user)
             return res.status(400).json({message: "Unable to sign in..."});
 
-        const { passwordHash, uid } = user;
+        const { passwordHash, _id: uid, firstName, lastName, location } = user;
         const isCorrect = await bcrypt.compare(password, passwordHash);
 
         if(!isCorrect)
             return res.status(400).json({message: "Unable to sign in..."});
 
-        jwt.sign({ uid, email }, process.env.JWT_SECRET, {expiresIn:"2d"}, (error, token) =>{
+        jwt.sign({ uid, email, firstName, lastName, location }, process.env.JWT_SECRET, {expiresIn:"2d"}, (error, token) =>{
             if(error)
                 return res.sendStatus(500);
 

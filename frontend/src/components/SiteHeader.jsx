@@ -6,9 +6,11 @@ import { SignUp } from "./SignUp"
 import { CartContext } from "../context/CartProvider"
 import { ViewCart } from "./ViewCart"
 import { CurrentUserContext } from "../context/CurrentUserProvider"
+import { useNavigate } from "react-router-dom"
 
 export const SiteHeader = () => {
     const [currentUser, token, setToken] = useContext(CurrentUserContext);
+    const navigate = useNavigate();
     return (
         <Column>
             <Row>
@@ -16,7 +18,12 @@ export const SiteHeader = () => {
                 <Row>
                     <ViewCart />
                     {currentUser ? (
-                        <button onClick={()=> setToken(null)}>Sign Out</button>
+                        <>
+                            <button onClick={() => {
+                                navigate("/orders")
+                            }}>View Orders</button>
+                            <button onClick={() => setToken(null)}>Sign Out</button>
+                        </>
                     ) : (
                         <>
                             <SignUp />

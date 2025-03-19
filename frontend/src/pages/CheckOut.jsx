@@ -32,7 +32,7 @@ export const CheckOut = () => {
             ) : (
                 <Column>
                     <h2>User Info</h2>
-                    <CartItemsList />
+                    <CartItemsList inMemory={true} />
                     <Row style={{ justifyContent: "center" }}>
                         <ConfirmModal label="Confirm Order" setIsConfirmed={setIsConfirmed} />
                         <button onClick={() => navigate("/")}>Continue Shopping</button>

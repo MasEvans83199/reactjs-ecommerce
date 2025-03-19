@@ -6,7 +6,7 @@ import { CurrentUserContext } from "../context/CurrentUserProvider";
 
 export const SignUp = () => {
     const [isVisible, setVisibility] = useState(false);
-    const[user, token, setToken] = useContext(CurrentUserContext);
+    const [user, token, setToken] = useContext(CurrentUserContext);
     const [firstName, setFirstName] = useState("Mason");
     const [lastName, setLastName] = useState("E");
     const [location, setLocation] = useState("TN");
